@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <nav class="flex w-full max-w-[1200px] justify-between items-center rounded shadow-lg m-auto mt-4 p-3 bg-White">
+  <nav class="flex w-full max-w-[1200px] justify-between items-center rounded shadow-lg mt-4 p-3 bg-White fixed left-1/2 transform -translate-x-1/2">
     <div class="logo">
       <NuxtLink to="/" class="flex gap-2">
         <img src="/images/logo.webp" alt="Logo" class="w-8 h-8"/>

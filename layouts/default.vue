@@ -1,6 +1,4 @@
 <script setup lang="ts">
-
-import Nav from "~/components/Nav.vue";
 </script>
 
 <template>
@@ -15,18 +13,22 @@ import Nav from "~/components/Nav.vue";
 
 <style>
 #__nuxt {
-  @apply flex flex-col min-h-screen;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 .__header {
-  @apply flex-none;
+  flex: none;
 }
 
 .__main {
-  @apply flex-1;
+  flex: 1;
 }
 
+
 .__footer {
-  @apply flex-none;
+  flex: none;
 }
 </style>
