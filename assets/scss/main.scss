@@ -25,6 +25,7 @@ a {
 
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -33,4 +34,49 @@ a {
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: var(--black);
+}
+
+section.page {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: grid;
+  position: relative;
+}
+
+.dots-container {
+  position: fixed;
+  z-index: 100;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+
+  @media screen and (max-width: 768px) {
+    bottom: 2rem;
+    top: auto;
+    width: 40vw;
+    height: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    flex-direction: row;
+  }
+
+  .dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: var(--brown);
+    cursor: pointer;
+
+    transition: all 0.5s ease;
+
+    &:not(.active) {
+      background-color: var(--white);
+      scale: 0.8;
+    }
+  }
 }
