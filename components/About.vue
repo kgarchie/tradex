@@ -1,39 +1,66 @@
 <script setup lang="ts">
-
 </script>
 
 <template>
-  <div class="max-w-[1200px] m-auto text-white font-roboto">
-    <h1>About</h1>
-    <div>
-      <p>
+  <div class="max-w-[1200px] m-auto text-white font-roboto isolate">
+    <video autoplay muted loop ref="video"
+           class="aspect-video w-full h-full m-auto absolute top-0 left-0 object-cover z-0 pointer-events-none">
+      <source src="/videos/landBlue.mp4" type="video/mp4">
+    </video>
+    <ClientOnly>
+      <SVG name="brown_blob"
+           v-for="i in 20"
+           class="w-72 absolute opacity-30 blur-lg"
+           :key="i"
+           :style="{top: `${Math.random() * 100}vh`, left: `${Math.random() * 100}vw`, transform: `scale(${Math.random() * 1.5}) rotate(${Math.random() * 360}deg)`}"
+           :id="`blob-${i}`"
+      />
+    </ClientOnly>
+    <Banner class="z-10 bg-Brown p-8 m-auto backdrop-blur-3xl rounded-lg bg-opacity-80 banner shadow-lg"
+            variant="secondary">
+      <h1 class="text-6xl font-bold text-white font-carter text-gradient drop-shadow-lg mb-2.5">About,</h1>
+      <p class="font-bold mb-1">
         Kenya TradeX is a logistics company dully registered in Kenya with the Registrar of Companies under the Kenyan
         Companies Act Cap 486 – Laws of Kenya.
       </p>
-      <p>
+      <p class="mb-1">
         We offer global logistics services including but not limited to clearing and forwarding, transportation, import
         and export commission agents, consultancy services, warehousing, and consolidation. Our logistics services
-        extend
-        beyond Kenya’s boundaries to the wider East African Community.
+        extend beyond Kenya’s boundaries to the wider East African Community.
       </p>
-      <p>
+      <p class="mb-1">
         Having been established in 2008, the company has grown over the years to command a section of Kenya’s as well as
         Ugandan Market through offering quality and professional logistics services. Our transport network runs across
         the
         East African region.
       </p>
-      <p>
+      <p class="mb-1">
         Based in Mombasa Kenya next to East Africa’s biggest port, Kenya TradeX is placed strategically to provide all
         logistics-related services in freight movement and in a professional, fast and reliable manner. We also have
         offices in Nairobi and an Agency in Kampala, Uganda to support our customers’ needs.
       </p>
-    </div>
-    <video autoplay muted class="aspect-video w-full h-full m-auto absolute top-0 left-0 object-cover">
-      <source src="/videos/landBlue.mp4" type="video/mp4">
-    </video>
+    </Banner>
   </div>
 </template>
 
 <style scoped>
+.text-gradient {
+  background: linear-gradient(135deg, white 0%, var(--blue));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
+.banner {
+  height: fit-content;
+  padding: 50px;
+  font-size: clamp(1rem, 1vw, 1.5rem);
+  width: 75%;
+}
+
+@media (max-width: 1366px) {
+  .banner {
+    margin-top: 15vh;
+  }
+}
 </style>

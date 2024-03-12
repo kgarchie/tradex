@@ -3,7 +3,7 @@
            class="absolute top-0 -z-10 w-full h-full object-cover"/>
   <div class="w-full overflow-hidden">
     <div class="max-w-[1200px] h-[100vh] m-auto flex relative overflow-visible" id="main">
-      <Banner class="backdrop-blur ml-20 banner">
+      <Banner class="backdrop-blur ml-20 banner shadow z-10">
         <h1 class="text-6xl font-bold text-white font-carter text-gradient drop-shadow-lg mb-2.5">Hello,</h1>
         <h2 class="text-white font-russo text-2xl drop-shadow-md ml-1 mb-0.5">We are Kenya Tradex.</h2>
         <p class="text-white drop-shadow font-roboto py-4">A customs agent in
@@ -26,7 +26,7 @@
       </Banner>
     </div>
     <ClientOnly>
-      <SVG name="blob"
+      <SVG name="blue_blob"
            v-for="i in 20"
            class="w-72 absolute -z-10 opacity-30 blur-lg"
            :key="i"

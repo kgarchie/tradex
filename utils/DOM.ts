@@ -1,8 +1,31 @@
+function throttle(method: Function, delay: number, context: any): () => void {
+    let inThrottle: boolean
+    return function () {
+        if (inThrottle) return
+
+        method.apply(context, arguments)
+
+        inThrottle = true
+        setTimeout(() => (inThrottle = false), delay)
+    }
+}
+
+function debounce(method: Function, delay: number, context: any): () => void {
+    let timer: ReturnType<typeof setTimeout>
+    return function () {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+            method.apply(context, arguments)
+        }, delay)
+    }
+}
+
 export class FullPage {
     private sections: Element[] = []
     private parent: HTMLElement | null = null
 
-    constructor() {}
+    constructor() {
+    }
 
     init(parent: HTMLElement) {
         if (!parent) return console.error("ERROR: DOM parent is not defined")
@@ -157,32 +180,31 @@ export class FullPage {
     }, 500, this)
 }
 
-export class UnClick {
-    private readonly escHandler: (event: KeyboardEvent) => void;
-    private readonly clickHandler: (event: Event) => void;
+export function unClick(targetElement: Element | null, closeFunction: Function) {
+    if (!targetElement) throw new Error('\'DEBUG: targetElement is null or undefined for UnClick function\'');
 
-    constructor(targetElement: Element | null, closeFunction: Function) {
-        if (!targetElement) throw new Error('\'DEBUG: targetElement is null or undefined for UnClick function\'')
-
-        this.clickHandler = (event: Event) => {
-            let isClickInside = targetElement.contains(event.target as Node);
-            if (!isClickInside) {
-                closeFunction();
-            }
+    const escHandler = (event: KeyboardEvent) => {
+        if (event.key === 'Escape') {
+            closeFunction();
         }
+    };
 
-        this.escHandler = (event: KeyboardEvent) => {
-            if (event.key === 'Escape') {
-                closeFunction();
-            }
+    const clickHandler = (event: Event) => {
+        const isClickInside = targetElement.contains(event.target as Node);
+        if (!isClickInside) {
+            closeFunction();
         }
+    };
 
-        document.addEventListener('keydown', this.escHandler)
-        document.addEventListener('click', this.clickHandler)
+    document.addEventListener('keydown', escHandler);
+    document.addEventListener('click', clickHandler);
+
+    const remove = () => {
+        document.removeEventListener('keydown', escHandler);
+        document.removeEventListener('click', clickHandler);
     }
 
-    remove() {
-        document.removeEventListener('keydown', this.escHandler)
-        document.removeEventListener('click', this.clickHandler)
-    }
+    return {
+        remove: remove
+    };
 }

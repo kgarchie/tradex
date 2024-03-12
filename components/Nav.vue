@@ -11,7 +11,7 @@
       </NuxtLink>
     </div>
     <div class="nav-links flex gap-4 items-center last:mr-2">
-      <NuxtLink>Home</NuxtLink>
+      <NuxtLink to="/">Home</NuxtLink>
       <NuxtLink>About</NuxtLink>
       <NuxtLink>Services</NuxtLink>
       <NuxtLink>Contact</NuxtLink>
@@ -21,5 +21,7 @@
 </template>
 
 <style scoped>
-
+.router-link-active {
+  color: var(--blue);
+}
 </style>

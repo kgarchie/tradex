@@ -29,6 +29,7 @@ onUnmounted(() => {
       <slot/>
     </main>
     <footer class="__footer">
+      <Fov/>
     </footer>
   </div>
 </template>

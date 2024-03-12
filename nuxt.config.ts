@@ -9,4 +9,11 @@ export default defineNuxtConfig({
         '~/assets/css/tailwind.css',
         '~/assets/scss/main.scss',
     ],
+    runtimeConfig: {
+        public: {
+            contactCallNumber: '',
+            contactEmail: '',
+            contactWhatsappNumber: '',
+        }
+    }
 })
