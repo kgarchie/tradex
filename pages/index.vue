@@ -1,9 +1,9 @@
 <template>
   <Title>Home</Title>
-  <section class="page">
+  <section class="page" id="home">
     <Landing/>
   </section>
-  <section class="page bg-Blue">
+  <section class="page bg-Blue" id="about">
     <About/>
   </section>
 </template>

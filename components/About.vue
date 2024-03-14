@@ -16,29 +16,43 @@
            :id="`blob-${i}`"
       />
     </ClientOnly>
-    <Banner class="z-10 bg-Brown p-8 m-auto backdrop-blur-3xl rounded-lg bg-opacity-80 banner shadow-lg"
+    <Banner class="z-10 bg-Brown p-8 backdrop-blur-3xl rounded-lg bg-opacity-80 banner shadow-lg"
             variant="secondary">
       <h1 class="text-6xl font-bold text-white font-carter text-gradient drop-shadow-lg mb-2.5">About,</h1>
-      <p class="font-bold mb-1">
-        Kenya TradeX is a logistics company dully registered in Kenya with the Registrar of Companies under the Kenyan
-        Companies Act Cap 486 – Laws of Kenya.
-      </p>
-      <p class="mb-1">
-        We offer global logistics services including but not limited to clearing and forwarding, transportation, import
-        and export commission agents, consultancy services, warehousing, and consolidation. Our logistics services
-        extend beyond Kenya’s boundaries to the wider East African Community.
-      </p>
-      <p class="mb-1">
-        Having been established in 2008, the company has grown over the years to command a section of Kenya’s as well as
-        Ugandan Market through offering quality and professional logistics services. Our transport network runs across
-        the
-        East African region.
-      </p>
-      <p class="mb-1">
-        Based in Mombasa Kenya next to East Africa’s biggest port, Kenya TradeX is placed strategically to provide all
-        logistics-related services in freight movement and in a professional, fast and reliable manner. We also have
-        offices in Nairobi and an Agency in Kampala, Uganda to support our customers’ needs.
-      </p>
+      <div class="flex gap-8 max-sm:flex-col">
+        <div class="w-full">
+          <NuxtImg src="/images/site_woman.png" alt="A picture of a woman on a construction site"
+                   class="rounded shadow-lg object-cover object-center w-full h-full"/>
+        </div>
+        <div class="w-full p-2">
+          <p class="font-bold mb-1">
+            Kenya TradeX is a logistics company dully registered in Kenya with the Registrar of Companies under the
+            Kenyan
+            Companies Act Cap 486 – Laws of Kenya.
+          </p>
+          <p class="mb-1">
+            We offer global <span class="font-bold">logistics services</span> including but not limited to clearing and forwarding, transportation,
+            import
+            and export commission agents, consultancy services, warehousing, and consolidation. Our logistics services
+            extend beyond Kenya’s boundaries to the wider East African Community.
+          </p>
+          <p class="mb-1">
+            Having been established in 2008, the company has grown over the years to command a section of Kenya’s as
+            well
+            as
+            Ugandan Market through offering quality and professional logistics services. Our transport network runs
+            across
+            the
+            East African region.
+          </p>
+          <p class="mb-1">
+            Based in <span class="font-bold">Mombasa, Kenya</span> next to East Africa’s biggest port, Kenya TradeX is placed strategically to provide
+            all
+            logistics-related services in freight movement and in a professional, fast and reliable manner. We also have
+            offices in Nairobi and an Agency in Kampala, Uganda to support our customers’ needs.
+          </p>
+        </div>
+      </div>
     </Banner>
   </div>
 </template>
@@ -55,7 +69,8 @@
   height: fit-content;
   padding: 50px;
   font-size: clamp(1rem, 1vw, 1.5rem);
-  width: 75%;
+  width: fit-content;
+  max-width: 90vw;
 }
 
 @media (max-width: 1366px) {

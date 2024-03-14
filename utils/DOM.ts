@@ -23,6 +23,8 @@ function debounce(method: Function, delay: number, context: any): () => void {
 export class FullPage {
     private sections: Element[] = []
     private parent: HTMLElement | null = null
+    private dots: Element[] = []
+    private listeners: Record<'scroll', Function[]> = {} as Record<'scroll', Function[]>
 
     constructor() {
     }
@@ -34,6 +36,15 @@ export class FullPage {
         this.handleMouseWheelScroll()
         this.handleTouchScroll()
         window.addEventListener('resize', this.handleResize)
+        window.addEventListener('keydown', this.handleArrowKeys.bind(this))
+    }
+
+    handleArrowKeys(event: KeyboardEvent) {
+        if (event.key === 'ArrowDown') {
+            this.next()
+        } else if (event.key === 'ArrowUp') {
+            this.prev()
+        }
     }
 
     destroy() {
@@ -43,6 +54,7 @@ export class FullPage {
         window.removeEventListener('touchstart', this.handleTouchScroll)
         window.removeEventListener('touchend', this.handleTouchScroll)
         window.removeEventListener('touchmove', this.handleTouchScroll)
+        window.removeEventListener('keydown', this.handleArrowKeys)
         document.querySelector('.dots-container')?.remove()
     }
 
@@ -95,21 +107,34 @@ export class FullPage {
             dotsContainer!.appendChild(dot)
 
             dot.addEventListener('click', () => {
-                const currentDot = document.querySelector('.dot.active')
+                const currentDot = dotsContainer!.querySelector('.dot.active')
                 if (currentDot) currentDot.classList.remove('active')
 
                 const currentSection = this.parent?.querySelector('.page.active')
                 if (currentSection) currentSection.classList.remove('active')
 
-                const nextSection = this.sections[index]
+                const nextSection = this.sections[index] as HTMLElement
                 nextSection.classList.add('active')
 
                 dot.classList.add('active')
-                nextSection.scrollIntoView({behavior: 'smooth'})
+                // nextSection.scrollIntoView({behavior: 'smooth'})
+
+                const offset = nextSection.offsetTop
+
+                this.parent?.scrollTo({top: offset, behavior: 'smooth'})
+                this.emit('scroll', currentSection as HTMLElement, nextSection)
             })
+
+            this.dots.push(dot)
         })
 
         dotsParent?.appendChild(dotsContainer)
+    }
+
+    moveTo(hash: string){
+        const nextIndex = this.sections.findIndex(section => section.id === hash.slice(1))
+        if (nextIndex === -1) return console.warn('DEBUG: No section found with the given hash')
+        this.dots[nextIndex].dispatchEvent(new Event('click'))
     }
 
     scroll(direction: 'UP' | 'DOWN') {
@@ -118,20 +143,17 @@ export class FullPage {
 
         if (nextSectionIndex < 0 || nextSectionIndex > this.sections.length - 1) return
 
-        const currentSection = this.sections[currentSectionIndex]
-        const nextSection = this.sections[nextSectionIndex]
+        this.dots[nextSectionIndex].dispatchEvent(new Event('click'))
+    }
 
-        currentSection.classList.remove('active')
-        nextSection.classList.add('active')
+    on(event: 'scroll', callback: (from: HTMLElement, to: HTMLElement) => void): void{
+        if (!this.listeners[event]) this.listeners[event] = []
+        this.listeners[event].push(callback)
+    }
 
-        const dotParent = document.getElementById('__nuxt');
-        const currentDot = dotParent?.querySelector('.dot.active')
-        if (currentDot) currentDot.classList.remove('active')
-
-        const nextDot = dotParent?.querySelector(`.dot:nth-child(${nextSectionIndex + 1})`)
-        if (nextDot) nextDot.classList.add('active')
-
-        nextSection.scrollIntoView({behavior: 'smooth'})
+    emit(event: 'scroll', from: HTMLElement, to: HTMLElement): void{
+        if (!this.listeners[event]) return
+        this.listeners[event].forEach(callback => callback(from, to))
     }
 
 
@@ -175,8 +197,10 @@ export class FullPage {
     }
 
     private handleResize = throttle(() => {
-        const currentSection = this.parent?.querySelector('.page.active')
-        if (currentSection) currentSection.scrollIntoView({behavior: 'smooth'})
+        const currentSection = this.parent?.querySelector('.page.active') as HTMLElement
+        if (!currentSection) return
+        const offset = currentSection.offsetTop
+        this.parent?.scrollTo({top: offset, behavior: 'smooth'})
     }, 500, this)
 }
 

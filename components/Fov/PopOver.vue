@@ -2,7 +2,7 @@
 const detailsSent = ref(false)
 const props = defineProps({
   menu: {
-    type: String as PropType<'whatsapp' | 'phone' | 'mail' | 'message' | null>,
+    type: String as PropType<'message' | null>,
     required: false
   }
 })
@@ -12,44 +12,18 @@ const details = reactive({
   contact: ''
 })
 
-if (localStorage.getItem('contactDetails')){
+if (localStorage.getItem('contactDetails')) {
   const storedDetails = JSON.parse(localStorage.getItem('contactDetails') as string)
   details.name = storedDetails.name
   details.contact = storedDetails.contact
   detailsSent.value = true
 }
 
-switch (props.menu) {
-  case 'whatsapp':
-    navigateTo({
-      path: 'https://api.whatsapp.com/send',
-      query: {
-        phone: $config.public.contactWhatsappNumber,
-        text: 'Hello, I would like to inquire about your services.'
-      }
-    }, {
-      external: true,
-      open: {
-        target: '_blank',
-        windowFeatures: {
-          width: window.innerWidth / 2,
-          height: window.innerHeight / 2,
-          left: window.innerWidth / 4,
-          top: window.innerHeight / 4
-        }
-      }
-    })
-    break
-  case 'phone':
-    navigateTo(`tel:${$config.public.contactPhoneNumber}`, {
-      external: true
-    })
-    break
-  case 'mail':
-    navigateTo(`mailto:${$config.public.contactEmail}`, {
-      external: true
-    })
-    break
+function clearDetails() {
+  localStorage.removeItem('contactDetails')
+  details.name = ''
+  details.contact = ''
+  detailsSent.value = false
 }
 
 function sendDetails() {
@@ -63,7 +37,7 @@ function sendDetails() {
 <template>
   <template v-if="menu === 'message'">
     <div
-        class="absolute bottom-12 left-0 bg-Brown p-4 rounded-lg shadow-lg z-10 w-96 max-w-[90vw] lg:w-[30rem] lg:max-w-[30rem]">
+        class="absolute bottom-12 left-0 bg-Brown p-4 rounded-lg shadow-lg z-10 w-96 max-w-[90vw] lg:w-[30rem] lg:max-w-[30rem] bg-opacity-80 backdrop-blur-md">
       <Transition>
         <KeepAlive>
           <div class="" v-if="!detailsSent">
@@ -98,7 +72,8 @@ function sendDetails() {
                 <SVG name="close" class="w-8 h-8"/>
               </button>
             </div>
-            <p class="text-Black my-2">Thank you for reaching out to us. We will get back to you shortly.</p>
+            <p class="text-Black my-2">Thank you for reaching out to us. We will get back to you. <br> <span
+                @click="clearDetails" class="font-bold">Clear Details?</span></p>
           </div>
         </KeepAlive>
       </Transition>

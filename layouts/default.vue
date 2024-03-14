@@ -2,6 +2,8 @@
 const main = ref<HTMLElement | null>(null)
 const fullPage = new FullPage()
 const loader = ref<HTMLElement | null>(null)
+const route = useRoute()
+const active = ref<string | null>(null)
 
 onMounted(() => {
   fullPage.init(main.value!)
@@ -10,10 +12,31 @@ onMounted(() => {
     main.value!.classList.add('zoom-in')
     loader.value!.classList.add('hidden')
   })
+
+  fullPage.on('scroll', (from, to) => {
+    setTimeout(() => {
+      if (route.hash !== to.id) {
+        active.value = to.id
+        window.history.replaceState(window.history.state, '', `#${to.id}`)
+      }
+    })
+  })
+
+  if (route.hash) {
+    setTimeout(() => {
+      fullPage.moveTo(route.hash)
+    })
+  }
 })
 
 onUnmounted(() => {
   fullPage.destroy()
+})
+
+watch(() => route.hash, (newVal, oldVal) => {
+  if (newVal !== oldVal) {
+    fullPage.moveTo(newVal)
+  }
 })
 </script>
 
@@ -23,7 +46,9 @@ onUnmounted(() => {
   </span>
   <div class="wrapper">
     <header class="__header">
-      <Nav/>
+      <ClientOnly>
+        <Nav :active="active" />
+      </ClientOnly>
     </header>
     <main class="__main hidden" ref="main">
       <slot/>
