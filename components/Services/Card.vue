@@ -1,14 +1,13 @@
 <script setup lang="ts">
 defineProps({
-  svg: String,
-  default: () => 'rocket'
+  svg: String
 })
 </script>
 
 <template>
   <div class="flex flex-col w-[350px] bg-White rounded m-2 shadow drop-shadow-lg max-sm:min-w-[350px]">
     <div class="header">
-      <SVG name="rocket" class="w-[50px]" />
+      <SVG :name="svg as any || 'rocket'" class="w-[30px]" />
       <span class="header-content">
         <slot name="header">
           Header Content.

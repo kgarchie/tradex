@@ -20,7 +20,12 @@ const svgs = {
   close: `/svgs/close.svg`,
   rocket: '/svgs/rocket.svg',
   plane: '/svgs/plane.svg',
-  consult: '/svgs/consult.svg'
+  consult: '/svgs/consult.svg',
+  smome: '/svgs/smome.svg',
+  flight: '/svgs/flight.svg',
+  van: '/svgs/van.svg',
+  water: '/svgs/water.svg',
+  advice: '/svgs/advice.svg'
 }
 
 defineProps({

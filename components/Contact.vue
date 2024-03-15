@@ -3,7 +3,7 @@
     <div class="container">
       <div class="glamour-box">
         <div class="header">
-          <h1 class="title">Contact Information</h1>
+          <h1 class="text-6xl font-bold text-white font-carter text-gradient drop-shadow-lg mb-2.5 max-sm:text-3xl">Contact,</h1>
         </div>
         <div class="body">
           <div class="phone">
@@ -110,6 +110,13 @@
 </template>
 
 <style scoped lang="scss">
+.text-gradient {
+  background: linear-gradient(135deg, white 0%, var(--blue));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .contact {
   width: 100%;
   display: flex;
@@ -278,7 +285,7 @@
       background-color: #fff;
       border-radius: 10px;
       padding: 2rem;
-      color: var(--blue);
+      color: var(--black);
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
       @media screen and (max-width: 768px) {
@@ -300,14 +307,14 @@
           textarea {
             width: 100%;
             padding: 1rem;
-            border: 1px solid var(--blue);
+            border: 1px solid var(--black);
             border-radius: 5px;
             outline: none;
             font-size: 1rem;
             font-weight: 500;
 
             &::placeholder {
-              color: var(--blue);
+              color: var(--black);
               font-weight: 200;
               font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
             }

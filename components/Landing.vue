@@ -15,10 +15,12 @@
         </p>
         <div class="flex space gap-4 mt-4">
           <NuxtLink
+              to="/#contact"
               class="bg-white text-Black px-4 py-2 rounded-md text-lg font-semibold hover:bg-Blue hover:text-White transition-colors">
             Get Started
           </NuxtLink>
           <NuxtLink
+              to="/#about"
               class="bg-white text-blue-500 px-4 py-2 rounded-md text-lg font-semibold hover:bg-White transition-colors duration-300">
             Learn More
           </NuxtLink>

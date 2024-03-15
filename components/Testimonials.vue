@@ -5,8 +5,8 @@
     <div class="w-full">
       <div id="testicontainer" class="flex w-full justify-center">
         <div class="left">
-          <div class="person" v-for="(testimonial, index) in testimonials" :key="index"
-               @click="clicked = index" :class="{ 'bg-White': testimonial === chosen }">
+          <div class="person text-white" v-for="(testimonial, index) in testimonials" :key="index"
+               @click="clicked = index" :class="{ 'bg-White color-black': testimonial === chosen }">
             <p class="ml-5">{{ testimonial.name }}</p>
             <NuxtImg :src="testimonial.img" :alt="testimonial.name"/>
           </div>
@@ -41,11 +41,6 @@ const testimonials = [
     img: '/images/bhavin.png'
   }, {
     quote: 'Honest, Efficient and Customer friendly Company. They will always deliver. Recommended',
-    name: 'Mwalo Paper Distributions',
-    company: 'Mwalo Paper Distributions',
-    img: '/images/company.jpeg'
-  }, {
-    quote: 'You are the best. I have never had any issues with your services. Keep it up!',
     name: 'Mwalo Paper Distributions',
     company: 'Mwalo Paper Distributions',
     img: '/images/company.jpeg'
@@ -103,6 +98,10 @@ const chosen = computed(() => {
 })
 </script>
 <style scoped>
+.color-black{
+  color: var(--black);
+}
+
 .text-gradient {
   background: linear-gradient(135deg, white 0%, var(--blue));
   -webkit-background-clip: text;
