@@ -3,7 +3,7 @@
            class="absolute top-0 -z-10 w-full h-full object-cover"/>
   <div class="w-full overflow-hidden">
     <div class="max-w-[1200px] h-[100vh] m-auto flex relative overflow-visible" id="main">
-      <Banner class="backdrop-blur ml-20 banner shadow z-10">
+      <Banner class="backdrop-blur ml-20 banner shadow z-10 max-sm:m-auto">
         <h1 class="text-6xl font-bold text-white font-carter text-gradient drop-shadow-lg mb-2.5">Hello,</h1>
         <h2 class="text-white font-russo text-2xl drop-shadow-md ml-1 mb-0.5">We are Kenya Tradex.</h2>
         <p class="text-white drop-shadow font-roboto py-4">A customs agent in
@@ -35,7 +35,7 @@
       />
     </ClientOnly>
   </div>
-  <SVG name="waves" style="filter: blur(2px);"/>
+  <SVG name="waves" style="filter: blur(2px); bottom: -5px"/>
 </template>
 <style scoped>
 .text-gradient {
@@ -51,11 +51,10 @@
   padding: 50px;
 }
 
-@media (max-width: 1366px) {
+@media (max-width: 768px) {
   .banner {
-    margin-top: 15vh;
+    margin-top: 18vh;
+    padding: 2rem;
   }
 }
 </style>
-<script setup lang="ts">
-</script>

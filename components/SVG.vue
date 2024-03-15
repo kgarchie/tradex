@@ -5,6 +5,11 @@ const svgs = {
     `/svgs/waves/wave-2.svg`,
     `/svgs/waves/wave-3.svg`
   ],
+  waves_light: [
+    '/svgs/waves_light/wave-1.svg',
+    '/svgs/waves_light/wave-2.svg',
+    '/svgs/waves_light/wave-3.svg'
+  ],
   blue_blob: `/svgs/blob.svg`,
   brown_blob: `/svgs/blob_dark.svg`,
   loading: `/svgs/loading.svg`,
@@ -12,7 +17,10 @@ const svgs = {
   mail: `/svgs/gmail.svg`,
   phone: `/svgs/phone-3.svg`,
   message: `/svgs/message-3.svg`,
-  close: `/svgs/close.svg`
+  close: `/svgs/close.svg`,
+  rocket: '/svgs/rocket.svg',
+  plane: '/svgs/plane.svg',
+  consult: '/svgs/consult.svg'
 }
 
 defineProps({
@@ -24,12 +32,17 @@ defineProps({
 </script>
 
 <template>
-  <template v-if="name == 'waves'">
+  <template v-if="name === 'waves'">
     <div id="waves">
       <img v-for="(wave, index) in svgs.waves" :key="index" :src="wave" alt="wave" class="wave"/>
     </div>
   </template>
-  <template v-else-if="name == 'blue_blob'">
+  <template v-else-if="name === 'waves_light'">
+    <div id="waves">
+      <img v-for="(wave, index) in svgs.waves_light" :key="index" :src="wave" alt="wave" class="wave"/>
+    </div>
+  </template>
+  <template v-else-if="name === 'blue_blob'">
     <div>
       <figure class="blob">
         <img :src="svgs.blue_blob" alt="blob"/>
@@ -39,7 +52,7 @@ defineProps({
       </figure>
     </div>
   </template>
-  <template v-else-if="name == 'brown_blob'">
+  <template v-else-if="name === 'brown_blob'">
     <div>
       <figure class="blob">
         <img :src="svgs.brown_blob" alt="blob"/>
@@ -49,7 +62,7 @@ defineProps({
       </figure>
     </div>
   </template>
-  <template v-else-if="name == 'loading'">
+  <template v-else-if="name === 'loading'">
     <img :src="svgs.loading" alt="loading" class="loading"/>
   </template>
   <template v-else>

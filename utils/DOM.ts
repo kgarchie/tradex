@@ -49,11 +49,6 @@ export class FullPage {
 
     destroy() {
         window.removeEventListener('resize', this.handleResize)
-        window.removeEventListener('DOMMouseScroll', this.handleMouseWheelScroll)
-        window.removeEventListener('mousewheel', this.handleMouseWheelScroll)
-        window.removeEventListener('touchstart', this.handleTouchScroll)
-        window.removeEventListener('touchend', this.handleTouchScroll)
-        window.removeEventListener('touchmove', this.handleTouchScroll)
         window.removeEventListener('keydown', this.handleArrowKeys)
         document.querySelector('.dots-container')?.remove()
     }
@@ -131,7 +126,7 @@ export class FullPage {
         dotsParent?.appendChild(dotsContainer)
     }
 
-    moveTo(hash: string){
+    moveTo(hash: string) {
         const nextIndex = this.sections.findIndex(section => section.id === hash.slice(1))
         if (nextIndex === -1) return console.warn('DEBUG: No section found with the given hash')
         this.dots[nextIndex].dispatchEvent(new Event('click'))
@@ -146,12 +141,12 @@ export class FullPage {
         this.dots[nextSectionIndex].dispatchEvent(new Event('click'))
     }
 
-    on(event: 'scroll', callback: (from: HTMLElement, to: HTMLElement) => void): void{
+    on(event: 'scroll', callback: (from: HTMLElement, to: HTMLElement) => void): void {
         if (!this.listeners[event]) this.listeners[event] = []
         this.listeners[event].push(callback)
     }
 
-    emit(event: 'scroll', from: HTMLElement, to: HTMLElement): void{
+    emit(event: 'scroll', from: HTMLElement, to: HTMLElement): void {
         if (!this.listeners[event]) return
         this.listeners[event].forEach(callback => callback(from, to))
     }
@@ -165,8 +160,17 @@ export class FullPage {
         }
     }
 
+    exempt(event: any, type: string) {
+        if(window.innerWidth >= 768){
+            return event.target.classList.contains('exempt-' + type);
+        } else {
+            return event.target.classList.contains('max-sm:exempt-' + type);
+        }
+    }
+
     handleMouseWheelScroll() {
         const delta = (event: any) => {
+            if (this.exempt(event, 'scroll')) return 0
             if (event.wheelDelta) return event.wheelDelta
             if (event.detail) return -event.detail
             alert('Your browser doesn\'t support mouse wheel event')
@@ -183,15 +187,18 @@ export class FullPage {
     handleTouchScroll() {
         let touchStartY = 0
         this.parent?.addEventListener('touchstart', (event) => {
+            if(this.exempt(event, 'scroll')) return
             touchStartY = event.touches[0].clientY
         })
         this.parent?.addEventListener('touchend', (event) => {
+            if(this.exempt(event, 'scroll')) return
             const touchEndY = event.changedTouches[0].clientY
             const delta = touchEndY - touchStartY
 
             this.mouseScroll(delta)
         })
         this.parent?.addEventListener('touchmove', (event) => {
+            if(this.exempt(event, 'scroll')) return
             event.preventDefault()
         })
     }

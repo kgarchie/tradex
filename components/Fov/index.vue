@@ -1,36 +1,15 @@
 <script setup lang="ts">
-const menu = ref<string | null>(null)
+const messages = ref(false)
 const fov = ref<HTMLElement | null>(null)
 const config = $config
 
-function toggleMenu(chosen: string, event: PointerEvent) {
-  if (menu.value === chosen) {
-    menu.value = null
-  } else {
-    menu.value = chosen
-  }
+function toggleMessages() {
+  messages.value = !messages.value
 
-  let container = event.target as HTMLElement
-  if (container.tagName.toLowerCase() === 'img') {
-    container = container.parentElement as HTMLElement
-  }
-
-  container.parentElement?.querySelector('.active')?.classList.remove('active')
-  container.classList.add('active')
-
-  if (menu.value !== 'message') {
-    const onMouseLeave = () => {
-      container.classList.remove('active')
-      container.removeEventListener('mouseleave', onMouseLeave)
-    }
-    container.addEventListener('mouseleave', onMouseLeave)
-  } else {
-    const unclick = unClick(fov.value as HTMLElement, () => {
-      menu.value = null
-      container.classList.remove('active')
-      unclick.remove()
-    })
-  }
+  const unclick = unClick(fov.value, () => {
+    messages.value = false
+    unclick.remove()
+  })
 }
 
 async function whatsapp() {
@@ -59,12 +38,13 @@ async function whatsapp() {
 <template>
   <nav
       class="w-fit rounded shadow-lg bottom-12 bg-White fixed left-1/2 transform -translate-x-1/2 z-10 hover:opacity-100 cursor-pointer transition-opacity p-1 backdrop-blur-lg"
-      :class="{'opacity-70': menu === null }"
+      :class="{'opacity-80': messages }"
       ref="fov">
     <KeepAlive>
-      <FovPopOver :menu="menu"
+      <FovPopOver :menu="messages"
+                  @close="toggleMessages"
                   class="bg-White p-4 rounded-lg shadow-lg z-10 absolute left-1/2 transform -translate-x-1/2 bottom-12"
-                  v-if="menu !== null"/>
+                  v-if="messages"/>
     </KeepAlive>
     <div class="flex justify-between items-center w-fit h-fit">
       <div class="p-1 hover:bg-white rounded transition-colors" @click="whatsapp"
@@ -79,7 +59,9 @@ async function whatsapp() {
                 title="send us an email" :to="`mailto:${config.public['contactEmail']}`">
         <SVG name="mail" class="w-8 h-8"/>
       </NuxtLink>
-      <div class="p-1 hover:bg-white rounded transition-colors" @click="toggleMenu('message', $event)"
+      <div class="p-1 hover:bg-white rounded transition-colors"
+           @click="toggleMessages"
+           :class="{'active': messages}"
            title="send us a live message">
         <SVG name="message" class="w-8 h-8"/>
       </div>

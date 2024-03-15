@@ -17,6 +17,13 @@ defineProps({
 div {
   width: 30vw;
   height: 70vh;
+  max-width: 98vw;
+}
+
+@media screen and (max-width: 1366px){
+  div {
+    width: 400px;
+  }
 }
 
 .primary {

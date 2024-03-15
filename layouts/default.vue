@@ -3,7 +3,7 @@ const main = ref<HTMLElement | null>(null)
 const fullPage = new FullPage()
 const loader = ref<HTMLElement | null>(null)
 const route = useRoute()
-const active = ref<string | null>(null)
+const active = ref<string>('home')
 
 onMounted(() => {
   fullPage.init(main.value!)
@@ -27,10 +27,6 @@ onMounted(() => {
       fullPage.moveTo(route.hash)
     })
   }
-})
-
-onUnmounted(() => {
-  fullPage.destroy()
 })
 
 watch(() => route.hash, (newVal, oldVal) => {
