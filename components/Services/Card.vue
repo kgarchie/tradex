@@ -40,6 +40,27 @@ defineProps({
   padding: 20px 30px 30px;
 }
 
+@media screen and (max-width: 1366px){
+  .header {
+    padding: 20px 20px 10px;
+  }
+
+  .body{
+    padding: 15px 20px 20px;
+    font-size: 1vw;
+  }
+
+  .header img{
+    width: 20px;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .body{
+    font-size: 1rem;
+  }
+}
+
 .card {
   border-radius: 10px;
   cursor: pointer;

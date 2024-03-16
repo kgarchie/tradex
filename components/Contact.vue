@@ -3,7 +3,8 @@
     <div class="container">
       <div class="glamour-box">
         <div class="header">
-          <h1 class="text-6xl font-bold text-white font-carter text-gradient drop-shadow-lg mb-2.5 max-sm:text-3xl">Contact,</h1>
+          <h1 class="text-6xl font-bold text-white font-carter text-gradient drop-shadow-lg mb-2.5 max-sm:text-3xl">
+            Contact,</h1>
         </div>
         <div class="body">
           <div class="phone">
@@ -122,7 +123,12 @@
   display: flex;
   margin: auto;
 
+  @media screen and (max-width: 1366px){
+    margin-top: 14vh;
+  }
+
   .container {
+    max-height: 80vh;
     display: flex;
     margin: auto;
     color: white;
@@ -297,7 +303,6 @@
           margin-bottom: 1rem;
 
           label {
-            font-size: 1.2rem;
             font-weight: 500;
             margin-bottom: 0.5rem;
             display: block;
@@ -306,11 +311,10 @@
           input,
           textarea {
             width: 100%;
-            padding: 1rem;
+            padding: 0.5rem 1rem;
             border: 1px solid var(--black);
             border-radius: 5px;
             outline: none;
-            font-size: 1rem;
             font-weight: 500;
 
             &::placeholder {

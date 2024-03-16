@@ -75,9 +75,23 @@
 }
 
 
-@media (max-width: 768px) {
+@media screen and (max-width: 1366px) {
   .banner {
+    max-height: 80vh;
+    margin-top: 5vh;
     padding: 2rem;
+  }
+
+  .banner h1 {
+    font-size: 3rem;
+    margin-bottom: 0.2em;
+    margin-top: -1rem;
+  }
+
+  .banner img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
   }
 }
 </style>

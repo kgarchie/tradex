@@ -166,6 +166,24 @@ const chosen = computed(() => {
   max-width: 1200px;
 }
 
+@media screen and (max-width: 1366px) {
+  .banner {
+    max-height: 80vh;
+    margin-top: 13vh;
+    padding: 2rem;
+  }
+
+  .banner h1 {
+    font-size: 3rem;
+    margin-top: -1rem;
+  }
+
+  .person {
+    width: 300px !important;
+    height: 80px !important;
+  }
+}
+
 
 @media (max-width: 768px) {
   .banner {

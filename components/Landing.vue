@@ -53,6 +53,13 @@
   padding: 50px;
 }
 
+@media screen and (max-width: 1366px) {
+  .banner {
+    margin-top: 18vh;
+    width: 40vw;
+  }
+}
+
 @media (max-width: 768px) {
   .banner {
     margin-top: 18vh;

@@ -79,9 +79,21 @@
   width: fit-content;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1366px) {
   .services {
     padding: 2rem;
+    margin-top: 5vh;
+    max-height: 80vh;
+  }
+
+  .services h1 {
+    font-size: 3rem;
+    margin-bottom: 0.2em;
+    margin-top: -1rem;
+  }
+
+  .services .card {
+    height: 30vh;
   }
 }
 
