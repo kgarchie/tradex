@@ -1,6 +1,6 @@
 <template>
   <Banner class="m-auto banner w-full" variant="secondary">
-    <h1 class="text-6xl font-bold text-white font-carter text-gradient drop-shadow-lg mb-2.5 max-sm:text-3xl">
+    <h1 class="text-6xl font-bold text-white font-carter text-gradient drop-shadow-lg mb-3 max-sm:text-3xl">
       Testimonials,</h1>
     <div class="w-full">
       <div id="testicontainer" class="flex w-full justify-center">

@@ -1,9 +1,9 @@
 <template>
   <div class="max-w-[1200px] m-auto font-roboto grid w-full bg-transparent max-sm:exempt-scroll">
-    <Banner class="services m-auto max-sm:max-h-[80vh] max-sm:exempt-scroll">
+    <Banner class="services m-auto max-sm:max-h-[80vh] max-sm:exempt-scroll sm:max-h-[80vh]">
       <h1 class="text-6xl font-bold font-carter text-gradient drop-shadow-lg mb-2.5 max-sm:text-3xl">
         Services,</h1>
-      <div class="flex sm:flex-wrap max-sm:overflow-x-scroll max-sm:exempt-scroll">
+      <div class="flex sm:flex-wrap max-sm:overflow-x-scroll max-sm:exempt-scroll justify-center" id="cards">
         <ServicesCard class="max-sm:exempt-scroll" svg="plane">
           <template v-slot:header>Clearing & Forwarding</template>
           <template v-slot:body>Our good relationship with leading shipping lines have enabled us come up with a
@@ -75,7 +75,7 @@
 .services {
   height: fit-content;
   padding: 50px;
-  font-size: clamp(1rem, 1vw, 1.5rem);
+  font-size: 1rem;
   width: fit-content;
 }
 
@@ -84,6 +84,22 @@
     padding: 2rem;
   }
 }
+
+#cards:hover > .card::after {
+  opacity: 1;
+}
 </style>
 <script setup lang="ts">
+onMounted(() => {
+  document.getElementById("cards")!.onmousemove = e => {
+    for(const card of document.getElementsByClassName("card") as HTMLCollectionOf<HTMLElement>) {
+      const rect = card.getBoundingClientRect(),
+          x = e.clientX - rect.left,
+          y = e.clientY - rect.top;
+
+      card.style.setProperty("--mouse-x", `${x}px`);
+      card.style.setProperty("--mouse-y", `${y}px`);
+    }
+  }
+})
 </script>
