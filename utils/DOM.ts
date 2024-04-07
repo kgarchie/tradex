@@ -206,7 +206,14 @@ export class FullPage {
         })
         this.parent?.addEventListener('touchmove', (event) => {
             if (this.exempt(event, 'scroll')) return
-            event.preventDefault()
+            const touchEndY = event.changedTouches[0].clientY
+            const touchEndX = event.changedTouches[0].clientX
+            const deltaY = touchEndY - touchStartY
+            const deltaX = touchEndX - touchStartX
+
+            if (Math.abs(deltaY) > Math.abs(deltaX)) {
+                event.preventDefault()
+            }
         })
     }
 
