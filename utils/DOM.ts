@@ -161,7 +161,7 @@ export class FullPage {
     }
 
     exempt(event: any, type: string) {
-        if(window.innerWidth >= 768){
+        if (window.innerWidth > 768) {
             return event.target.classList.contains('exempt-' + type);
         } else {
             return event.target.classList.contains('max-sm:exempt-' + type);
@@ -186,19 +186,26 @@ export class FullPage {
 
     handleTouchScroll() {
         let touchStartY = 0
+        let touchStartX = 0
         this.parent?.addEventListener('touchstart', (event) => {
-            if(this.exempt(event, 'scroll')) return
+            if (this.exempt(event, 'scroll')) return
             touchStartY = event.touches[0].clientY
+            touchStartX = event.touches[0].clientX
         })
         this.parent?.addEventListener('touchend', (event) => {
-            if(this.exempt(event, 'scroll')) return
+            if (this.exempt(event, 'scroll')) return
             const touchEndY = event.changedTouches[0].clientY
-            const delta = touchEndY - touchStartY
+            const touchEndX = event.changedTouches[0].clientX
+            const deltaY = touchEndY - touchStartY
+            const deltaX = touchEndX - touchStartX
 
-            this.mouseScroll(delta)
+
+            if (Math.abs(deltaY) > Math.abs(deltaX)) {
+                this.mouseScroll(deltaY)
+            }
         })
         this.parent?.addEventListener('touchmove', (event) => {
-            if(this.exempt(event, 'scroll')) return
+            if (this.exempt(event, 'scroll')) return
             event.preventDefault()
         })
     }

@@ -62,8 +62,9 @@
 
 @media (max-width: 768px) {
   .banner {
-    margin-top: 18vh;
+    margin: 22vh auto;
     padding: 2rem;
+    width: 400px;
   }
 }
 </style>

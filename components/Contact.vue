@@ -134,8 +134,9 @@
     color: white;
 
     @media screen and (max-width: 768px) {
-      flex-direction: column-reverse;
+      flex-direction: column;
       gap: 1rem;
+      margin-top: -2rem;
     }
 
     .glamour-box {
@@ -151,9 +152,17 @@
       overflow: hidden;
 
       @media screen and (max-width: 768px) {
-        width: 100%;
-        margin-right: 0;
-        margin-bottom: 2rem;
+        width: 98vw;
+        margin: auto;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+        gap: 1rem;
+
+        .footer{
+          margin: 0 !important;
+        }
       }
 
       .blobs {
@@ -192,6 +201,10 @@
         justify-content: space-between;
         margin-bottom: 2rem;
 
+        @media screen and (max-width: 768px) {
+          margin: 0;
+        }
+
         .title {
           font-size: 1.8rem;
           text-transform: capitalize;
@@ -200,6 +213,10 @@
       }
 
       .body {
+        @media screen and (max-width: 768px) {
+          display: none;
+        }
+
         .phone,
         .email,
         .location {
@@ -244,6 +261,7 @@
         display: flex;
         margin-top: auto;
         justify-content: space-between;
+        z-index: 100;
 
         .socials {
           display: flex;
@@ -295,7 +313,8 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
       @media screen and (max-width: 768px) {
-        width: 100%;
+        width: 98vw;
+        margin: auto;
       }
 
       form {

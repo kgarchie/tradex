@@ -56,13 +56,13 @@ section.page {
   align-items: center;
 
   @media screen and (max-width: 768px) {
-    bottom: 1.5rem;
+    bottom: 1rem;
     top: auto;
-    width: 40vw;
     height: auto;
     left: 50%;
-    transform: translateX(-42%);
+    justify-content: center;
     flex-direction: row;
+    transform: translateX(-50%);
   }
 
   .dot {

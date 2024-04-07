@@ -12,7 +12,7 @@ const isActive = computed(() => {
 
 <template>
   <nav
-      class="flex w-full max-w-[1200px] justify-between items-center rounded shadow-lg mt-4 p-3 bg-White fixed left-1/2 transform -translate-x-1/2 z-20">
+      class="flex w-full max-w-[1200px] justify-between items-center rounded shadow-lg mt-2 p-3 bg-White fixed left-1/2 transform -translate-x-1/2 z-20 max-sm:max-w-[98vw]">
     <div class="logo">
       <NuxtLink to="/#home" class="flex gap-2">
         <NuxtImg src="/images/logo.webp" alt="Logo" class="w-8 h-8"/>

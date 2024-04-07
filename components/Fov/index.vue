@@ -37,9 +37,8 @@ async function whatsapp() {
 
 <template>
   <nav
-      class="w-fit rounded shadow-lg bg-White fixed left-1/2 transform -translate-x-1/2 z-10 hover:opacity-100 cursor-pointer transition-opacity p-1 backdrop-blur-lg"
+      class="w-fit rounded shadow-lg bg-White fixed left-1/2 transform -translate-x-1/2 z-10 hover:opacity-100 focus:opacity-100 cursor-pointer transition-opacity p-1 backdrop-blur-lg fov"
       :class="{'opacity-80': messages }"
-      style="bottom: 2vh"
       ref="fov">
     <KeepAlive>
       <FovPopOver :menu="messages"
@@ -73,5 +72,11 @@ async function whatsapp() {
 <style scoped>
 .active {
   background-color: white;
+}
+
+@media screen and (max-width: 768px) {
+  .fov {
+    bottom: 2.5rem;
+  }
 }
 </style>

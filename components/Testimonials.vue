@@ -2,23 +2,21 @@
   <Banner class="m-auto banner w-full" variant="secondary">
     <h1 class="text-6xl font-bold text-white font-carter text-gradient drop-shadow-lg mb-3 max-sm:text-3xl">
       Testimonials,</h1>
-    <div class="w-full">
-      <div id="testicontainer" class="flex w-full justify-center">
-        <div class="left">
-          <div class="person text-white" v-for="(testimonial, index) in testimonials" :key="index"
-               @click="clicked = index" :class="{ 'bg-White color-black': testimonial === chosen }">
-            <p class="ml-5">{{ testimonial.name }}</p>
-            <NuxtImg :src="testimonial.img" :alt="testimonial.name"/>
-          </div>
+    <div class="flex w-full justify-center max-sm:flex-col">
+      <div class="left max-sm:overflow-x-scroll max-sm:exempt-scroll">
+        <div class="person text-white bg-gray-50/10" v-for="(testimonial, index) in testimonials" :key="index"
+             @click="clicked = index" :class="{ 'bg-White color-black active': testimonial === chosen }">
+          <p class="ml-5">{{ testimonial.name }}</p>
+          <NuxtImg :src="testimonial.img" :alt="testimonial.name"/>
         </div>
-        <div class="right">
-          <Testimonial :quote="chosen.quote"
-                       :name="chosen.name"
-                       :company="chosen.company"
-                       :img="chosen.img"
-                       class="shadow-lg"
-          />
-        </div>
+      </div>
+      <div class="right">
+        <Testimonial :quote="chosen.quote"
+                     :name="chosen.name"
+                     :company="chosen.company"
+                     :img="chosen.img"
+                     class="shadow-lg"
+        />
       </div>
     </div>
   </Banner>
@@ -34,7 +32,7 @@ const testimonials = [
     name: 'Robanne Traders',
     company: 'Robanne Traders',
     img: '/images/company.jpeg'
-  },  {
+  }, {
     quote: 'A very professional Company that takes good care of her customers. Happy to clear our cars with you',
     name: 'Bhavin Motors',
     company: 'Bhavin Motors',
@@ -61,7 +59,7 @@ const Testimonial = defineComponent({
   },
   setup(props) {
     return () => h('div', {class: 'bg-White rounded ml-5 smooth'}, [
-      h('div', {class: 'max-w-screen-xl px-4 py-8 mx-auto lg:py-16 lg:px-6 ml-10'}, [
+      h('div', {class: 'max-w-screen-xl px-4 py-8 mx-auto lg:py-16 lg:px-6 ml-10 max-sm:px-6 max-sm:py-4 max-sm:m-auto'}, [
         h('figure', {class: 'max-w-screen-md mx-auto'}, [
           h('svg', {
             class: 'h-12 text-gray-400', viewBox: '0 0 24 27', fill: 'none',
@@ -98,7 +96,7 @@ const chosen = computed(() => {
 })
 </script>
 <style scoped>
-.color-black{
+.color-black {
   color: var(--black);
 }
 
@@ -116,7 +114,7 @@ const chosen = computed(() => {
   justify-content: center;
 }
 
-.left .person {
+.person {
   width: 250px;
   height: 100px;
   display: flex;
@@ -128,6 +126,10 @@ const chosen = computed(() => {
   cursor: pointer;
   padding: 1rem;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.person.active {
+  background-color: var(--white);
 }
 
 .left .person img {
@@ -148,12 +150,8 @@ const chosen = computed(() => {
 }
 
 @media screen and (max-width: 768px) {
-  #testicontainer {
-    flex-direction: column;
-  }
-
   .left {
-    margin-bottom: 1.5rem;
+    margin: 1rem 0;
     flex-direction: row;
   }
 }
@@ -179,8 +177,8 @@ const chosen = computed(() => {
   }
 
   .person {
-    width: 300px !important;
-    height: 80px !important;
+    width: 300px;
+    height: 80px;
   }
 }
 
@@ -188,7 +186,39 @@ const chosen = computed(() => {
 @media (max-width: 768px) {
   .banner {
     padding: 2rem;
-    max-width: 90vw;
+    max-width: 98vw;
+    margin: auto;
+  }
+
+  @media (max-height: 800px) {
+    .banner {
+      margin-top: 12vh;
+    }
+  }
+
+  .person {
+    width: 220px;
+    height: 80px;
+  }
+
+  .left {
+    display: grid;
+    margin: 0;
+    grid-template-columns: 220px 220px 220px 220px;
+    justify-content: flex-start;
+    gap: 1rem;
+  }
+
+  .person {
+
+  }
+
+  .right {
+    margin-bottom: 0;
+  }
+
+  .right > div {
+    margin: auto;
   }
 }
 </style>
