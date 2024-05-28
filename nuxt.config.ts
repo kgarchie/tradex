@@ -16,4 +16,7 @@ export default defineNuxtConfig({
             contactWhatsappNumber: '',
         }
     },
+    routeRules: {
+        "/*": {prerender: true},
+    }
 })
