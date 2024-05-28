@@ -74,6 +74,10 @@ async function whatsapp() {
   background-color: white;
 }
 
+.fov {
+  bottom: 1rem;
+}
+
 @media screen and (max-width: 768px) {
   .fov {
     bottom: 2.5rem;
